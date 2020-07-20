@@ -1,4 +1,4 @@
-package com.example.textsimilaritydetector;
+package com.example.fypwebhost;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
