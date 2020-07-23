@@ -168,7 +168,7 @@ public class login extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             String[] data = response.split(",");
-                            Toast.makeText(getApplicationContext(), "response = "+response, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getApplicationContext(), "response = "+response, Toast.LENGTH_SHORT).show();
                             if(isValidEmail(data[2].trim()))
                             {
                                 Toast.makeText(login.this, "Logged in successfully", Toast.LENGTH_SHORT).show();
