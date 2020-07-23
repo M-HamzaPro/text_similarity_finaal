@@ -81,7 +81,7 @@ public class ClassesFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Classes classes = classesArrayList.get(position);
                     Toast.makeText(getContext(), "Class_id"+classes.getClassCode(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), CurrentClass.class);
+                    Intent intent = new Intent(getContext(), CurrentClassTeacher.class);
 
                     intent.putExtra("Class_name", classes.getName());
                     intent.putExtra("Class_id", classes.getClassCode());

@@ -2,6 +2,8 @@ package com.example.fypwebhost;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -102,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 if(code.contains(randomNumber))
                 {
                     signUpUser();
-                    Intent intent = new Intent(MainActivity.this, login.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(MainActivity.this, login.class);
+//                    startActivity(intent);
                 }
                 else
                 {
@@ -131,9 +133,11 @@ public class MainActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            if(response.equalsIgnoreCase("Account Created"))
+                            if(response.contains("Account Created"))
                             {
                                 Toast.makeText(MainActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this, login.class);
+                                startActivity(intent);
                             }
                             else
                             {
@@ -240,5 +244,24 @@ public class MainActivity extends AppCompatActivity {
         }
 //        Toast.makeText(MainActivity.this, user_type, Toast.LENGTH_SHORT).show();
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu,menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
 
+            case R.id.menu_logout:
+                Toast.makeText(getApplicationContext(), "You are not logged in", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.menu_compare:
+                Intent intent2 = new Intent(this, CosineComparing.class);
+                startActivity(intent2);
+                break;
+
+        }
+        return true;
+    }
 }

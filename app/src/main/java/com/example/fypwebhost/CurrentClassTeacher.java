@@ -14,14 +14,14 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class CurrentClass extends AppCompatActivity {
+public class CurrentClassTeacher extends AppCompatActivity {
     SharedPreferences prefs;
     String classCode, loginEmail, userId, userName, userPassword, userType, classID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_current_class);
+        setContentView(R.layout.activity_current_class_teacher);
 
 
 
@@ -36,7 +36,7 @@ public class CurrentClass extends AppCompatActivity {
         classID = intent.getStringExtra("classID");
 //
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_class);
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation_class_teacher);
 
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
@@ -57,8 +57,8 @@ public class CurrentClass extends AppCompatActivity {
                         case R.id.navigation_stream:
                             selectedFragment = new ClassStream();
                             break;
-                        case R.id.navigation_classWork:
-                            selectedFragment = new ClassWork(classCode, userType, classID);
+                        case R.id.navigation_classWork_teacher:
+                            selectedFragment = new ClassWorkTeacher(classCode, userType, classID);
                             break;
                         case R.id.navigation_members:
                             selectedFragment = new ClassMembers(classCode, classID, userType);

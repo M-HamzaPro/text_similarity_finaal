@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -228,5 +230,31 @@ public class login extends AppCompatActivity {
 
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
+    }
+
+
+
+
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mymenu,menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+
+            case R.id.menu_logout:
+                Toast.makeText(getApplicationContext(), "You are not logged in", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.menu_compare:
+                Intent intent2 = new Intent(this, CosineComparing.class);
+                startActivity(intent2);
+                break;
+
+        }
+        return true;
     }
 }

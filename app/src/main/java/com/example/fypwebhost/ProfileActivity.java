@@ -1,5 +1,7 @@
 package com.example.fypwebhost;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -74,14 +76,22 @@ public class ProfileActivity extends AppCompatActivity {
         else
         {
             // progressBar.setVisibility(View.VISIBLE);
-            StringRequest request = new StringRequest(Request.Method.POST, "https://temp321.000webhostapp.com/connect/forgetPasswordChange.php",
+            StringRequest request = new StringRequest(Request.Method.POST, "https://temp321.000webhostapp.com/connect/changeProfile.php",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            if(response.equalsIgnoreCase("Profile updated"))
+                            if(response.contains("Profile updated"))
                             {
                                 Toast.makeText(getApplicationContext(), "Profile updated", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Login Again to see updated content", Toast.LENGTH_SHORT).show();
+                                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("LogIn", Context.MODE_PRIVATE);
 
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.clear();
+                                editor.commit();
+
+                                Intent intent1 = new Intent(getApplicationContext(), login.class);
+                                startActivity(intent1);
                             }
                             else
                             {

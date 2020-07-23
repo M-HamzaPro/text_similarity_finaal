@@ -1,9 +1,7 @@
 package com.example.fypwebhost;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,13 +28,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.material.snackbar.Snackbar;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
 import net.gotev.uploadservice.UploadNotificationConfig;
@@ -53,22 +44,24 @@ import java.util.Map;
 import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
-public class ClassWork extends Fragment {
 
-     Button buttonCreateAssignment, buttonUpload, uploadAssignment;
-     EditText editTextTitle, editTextDueDate, editTextPostDate;
-     String assigTitle, assigDueDate, assigPostDate, classCode, userType, classID;
+public class ClassWorkTeacher extends Fragment {
+
+
+    Button buttonCreateAssignment;
+    EditText editTextTitle, editTextDueDate, editTextPostDate;
+    String assigTitle, assigDueDate, assigPostDate, classCode, userType, classID;
 
     ListView listView;
     AssignmentAdapter adapter;
-//    ProgressBar progressBar;
+    //    ProgressBar progressBar;
     public static ArrayList<AssignmentModelClass> assignmentArrayList = new ArrayList<>();
-//    public static String URL="https://temp321.000webhostapp.com/connect/getAssignmentsInfo.php";
-public static String URL="https://temp321.000webhostapp.com/connect/getAssignmentInfoNew.php";
+        public static String URL="https://temp321.000webhostapp.com/connect/getAssignmentsInfo.php";
+
 
     String encodedfile, fileName, TAG = "INFO", path;
     int PICKFILE_REQUEST_CODE = 100;
-    public ClassWork(String classCode, String userType, String classID)
+    public ClassWorkTeacher(String classCode, String userType, String classID)
     {
         this.classCode = classCode;
         this.userType = userType;
@@ -80,46 +73,8 @@ public static String URL="https://temp321.000webhostapp.com/connect/getAssignmen
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.class_work, container, false);
+        View view = inflater.inflate(R.layout.class_work_teacher, container, false);
         listView = view.findViewById(R.id.mylistview);
-
-
-        uploadAssignment = view.findViewById(R.id.uploadAssignment);
-        uploadAssignment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Dexter.withContext(getContext()).withPermission(Manifest.permission.READ_EXTERNAL_STORAGE).withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("*/txt");
-                        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-                        try {
-                            startActivityForResult(
-                                    Intent.createChooser(intent, "Select a File to Upload"),
-                                    PICKFILE_REQUEST_CODE);
-                        } catch (android.content.ActivityNotFoundException ex) {
-                            // Potentially direct the user to the Market with a Dialog
-                            Snackbar snackbar = Snackbar.make(v.findViewById(android.R.id.content), "Please install a File Manager.", Snackbar.LENGTH_LONG);
-                            snackbar.setTextColor(Color.parseColor("#ff0000"));
-                            snackbar.show();
-                        }
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-                    }
-                }).check();
-
-            }
-        });
 
 
 
@@ -179,7 +134,7 @@ public static String URL="https://temp321.000webhostapp.com/connect/getAssignmen
         buttonCreateAssignment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showCreateDialog(classCode);
+                showCreateDialog(classCode);
             }
         });
 
@@ -203,7 +158,7 @@ public static String URL="https://temp321.000webhostapp.com/connect/getAssignmen
         editTextPostDate = (EditText) dialogView.findViewById(R.id.editTextPostDate);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonCreateAssignment);
 
-     //   dialogBuilder.setTitle("Updating Class:  "+className +" "+ classId);
+        //   dialogBuilder.setTitle("Updating Class:  "+className +" "+ classId);
         dialogBuilder.setTitle("Creating New Assignment");
 
         final AlertDialog alertDialog = dialogBuilder.create();

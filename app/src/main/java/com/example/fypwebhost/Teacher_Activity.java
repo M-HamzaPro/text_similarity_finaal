@@ -3,19 +3,14 @@ package com.example.fypwebhost;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -86,7 +81,7 @@ public class Teacher_Activity extends AppCompatActivity {
 //                Intent intent = new Intent(getApplicationContext(), Student_Activity.class);
 //                startActivity(intent);
 
-                attach_image();
+             //   attach_image();
 
                 Toast.makeText(getApplicationContext(), "profile pressed", Toast.LENGTH_SHORT).show();
                 break;
@@ -117,65 +112,65 @@ public class Teacher_Activity extends AppCompatActivity {
 
 
 
-    public void attach_image() {
-        if(!checkPermission()){
-            requestPermission();
-        }
-        else{
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("*/txt");
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            startActivityForResult(Intent.createChooser(intent, "Select Image"), 100);
-        }
-
-    }
-    public String getImagePath(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
-        cursor.close();
-
-        cursor = getContentResolver().query(
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
-
-        return path;
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Image_Uri = data.getData();
-            String path=getImagePath(Image_Uri);
-            Pic=path.substring(path.lastIndexOf("/") + 1);
-        }
-    }
-    private boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (result == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    private void requestPermission() {
-
-
-        ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 110);
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 110:
-
-                break;
-        }
-    }
+//    public void attach_image() {
+//        if(!checkPermission()){
+//            requestPermission();
+//        }
+//        else{
+//            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+//            intent.setType("*/txt");
+//            intent.addCategory(Intent.CATEGORY_OPENABLE);
+//            startActivityForResult(Intent.createChooser(intent, "Select Image"), 100);
+//        }
+//
+//    }
+//    public String getImagePath(Uri uri) {
+//        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+//        cursor.moveToFirst();
+//        String document_id = cursor.getString(0);
+//        document_id = document_id.substring(document_id.lastIndexOf(":") + 1);
+//        cursor.close();
+//
+//        cursor = getContentResolver().query(
+//                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
+//        cursor.moveToFirst();
+//        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+//        cursor.close();
+//
+//        return path;
+//    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 100 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+//            Image_Uri = data.getData();
+//            String path=getImagePath(Image_Uri);
+//            Pic=path.substring(path.lastIndexOf("/") + 1);
+//        }
+//    }
+//    private boolean checkPermission() {
+//        int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+//        if (result == PackageManager.PERMISSION_GRANTED) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+//    private void requestPermission() {
+//
+//
+//        ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 110);
+//
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+//        switch (requestCode) {
+//            case 110:
+//
+//                break;
+//        }
+//    }
 }
 

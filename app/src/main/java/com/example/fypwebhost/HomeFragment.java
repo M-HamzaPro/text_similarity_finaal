@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -59,8 +58,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Toast.makeText(getContext(), "checkin"+userEmail, Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), "checkin"+userIdOld, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "checkin"+userEmail, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "checkin"+userIdOld, Toast.LENGTH_SHORT).show();
 
         buttonEditProfile = view.findViewById(R.id.buttonEditProfile);
         buttonEditProfile.setOnClickListener(new View.OnClickListener() {
@@ -68,20 +67,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v)
             {
                 Intent intent = new Intent(getContext(), ProfileActivity.class);
-//                intent.putExtra("name", textViewName.getText());
-//                intent.putExtra("password", textViewPassword.getText());
-//                intent.putExtra("id", UserId);
                 startActivity(intent);
             }
         });
-
-//        editTextName = view.findViewById(R.id.editTextName);
-//        editTextEmail = view.findViewById(R.id.editTextEmail);
-//        editTextPassword = view.findViewById(R.id.editTextPassword);
-//
-//        editTextEmail.setEnabled(false);
-//        editTextName.setEnabled(false);
-//        editTextPassword.setEnabled(false);
 
         textViewTest = view.findViewById(R.id.textViewTest);
         textViewName = view.findViewById(R.id.textViewName);
@@ -102,23 +90,7 @@ public class HomeFragment extends Fragment {
 
     public void retrieveData() {
 
-        //Toast.makeText(getContext(), "Method call", Toast.LENGTH_SHORT).show();
-
         arrayListUser.clear();
-
- //       final String teacherName = teacherEmail;
-//        final char type = teacherName.charAt(0);
-//        final char userId1 = teacherName.charAt(1);
-//        final char userId2 = teacherName.charAt(2);
-
-       // final String userId = teacherName.substring(1, 3);
-       // final String mail = teacherName.substring(3);
-
-        //Toast.makeText(getContext(), "mail check"+teacherEmail, Toast.LENGTH_SHORT).show();
-
-//        final String[] data = teacherEmail.split(",");
-//        //Toast.makeText(getContext(), "id check"+data[1], Toast.LENGTH_SHORT).show();
-
         StringRequest request = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
